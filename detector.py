@@ -70,16 +70,7 @@ class Detector(object):
 
                 idx = int(detections[0,0,i,1])
                 box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
-                bbox = box.astype("int")
-
-                bboxs.append(bbox)
-            
-                # label = "{}: {:.2f}%".format(self.CLASSES[idx], confidence * 100)
-                # print("[INFO] {}".format(label))
-
-                cv2.rectangle(image, (bbox[0], bbox[1]), (bbox[2], bbox[3]),
-                    self.COLORS[idx], 2)
-                
-
+                box = list(box)
+                bboxs.append(box)
 
         return bboxs, image
