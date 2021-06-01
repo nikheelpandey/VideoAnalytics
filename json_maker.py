@@ -1,5 +1,5 @@
 import cv2
-import numpy 
+# import numpy as np 
 from feed_input import DummyFeed
 from detector import Detector
 from tqdm import tqdm
@@ -8,7 +8,6 @@ import json
 cam = DummyFeed()
 model = Detector()
 
-# cv2.namedWindow("win",cv2.WINDOW_NORMAL)
 
 
 frame_id = 0
@@ -31,11 +30,13 @@ while True:
     else:
 
         print("Processed")
+        break
+
 
     data_ls.append(frame_data)
 
-    if frame_id == 10:
+    if frame_id == 1000:
         break
 
-with open('detection.json', 'w') as file:
-    json.dump(data_ls, file)
+    with open('detection.json', 'w') as file:
+        json.dump(data_ls, file)
