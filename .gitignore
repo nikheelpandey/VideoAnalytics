@@ -5,6 +5,11 @@ __pycache__/
 
 
 data/
+model/
+result/
+
+*.gif
+*.avi
 
 # C extensions
 *.so

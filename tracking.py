@@ -1,46 +1,43 @@
-import numpy as np
-from misc import TrackUtils 
-from scipy.optimize import linear_sum_assignment
-from kalman import KalmanBoxTracker
-from collections import deque
 import uuid
 import random
-
-
+import numpy as np
+from misc import TrackUtils 
+from collections import deque
+from kalman import KalmanBoxTracker
+from scipy.optimize import linear_sum_assignment
 
 
 class Track(object):
-	"""
-	Track:
-
-		trackId		: the id of the tracker
-		KF 			: KalmanFIlter
-		Prediction 	: Prediction of centroid for the next frame
-		tracePath 	: Path histroy to make a trail of centroid
 	
-	"""
 	def __init__(self, prediction):
+
 		self.trackId = str(uuid.uuid4())
 		self.KF = KalmanBoxTracker(prediction)
 		self.prediction = np.asarray(prediction)
+		self.centroid = None
 		self.undetectedFrameCount = 0
 		self.tracePath = deque(maxlen=25)
 		self.IOU_history = deque(maxlen=5)
 		self.IOU_history.append(self.prediction)
 		self.color= [random.randint(1,15)*15,random.randint(1,15)*15,
 					random.randint(0,15)*15]
+			
 
 
 
 
 class Tracker(object):
 
-	
-	def __init__(self, thresh1, thresh2, thresh3 ):
+	linear_sum_assignment
+	def __init__(self, thresh1=None, thresh2=None ):
 		# super(Tracker, self).__init__()
-		self.IOU_thresh = float(thresh1)
-		self.dist_thresh= thresh2
-		self.absent_frame_thresh = thresh3
+
+		if thresh1 is None: thresh1=200 
+		if thresh2 is None: thresh2=10 
+
+
+		self.dist_thresh= thresh1
+		self.absent_frame_thresh = thresh2
 		self.trackerList = []
 		self.assignment = []
 		self.utils = TrackUtils()
@@ -129,4 +126,5 @@ class Tracker(object):
 				self.trackerList[i].prediction = self.trackerList[i].KF.predict()
 
 			centroid_dot = self.utils.centroid(self.trackerList[i].prediction)
+			self.trackerList[i].centroid = centroid_dot.reshape(1,2)
 			self.trackerList[i].tracePath.append(centroid_dot)

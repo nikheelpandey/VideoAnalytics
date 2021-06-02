@@ -15,7 +15,9 @@ frame_id = 0
 data_ls = []
 
 
-while True:
+# while True:
+
+for i in tqdm(range(5000)):
 
     frame = cam.get_frame()
 
@@ -27,16 +29,16 @@ while True:
         frame_data["frame_id"] = frame_id
         frame_data["bboxs"] = bboxs
     
-    else:
+    # else:
 
-        print("Processed")
-        break
+    #     print("Processed")
+    #     break
 
 
     data_ls.append(frame_data)
 
-    if frame_id == 1000:
-        break
+    # if frame_id == 5000:
+    #     break
 
     with open('detection.json', 'w') as file:
         json.dump(data_ls, file)
