@@ -23,3 +23,7 @@ Supports:
 4. Run `create_video.py` to stitch the images from `result` into a video file.
 
 
+To do:
+- Create end-to-end detection and tracking pipeline
+- Integrate MongoDB as database
+- Create deterministic logic for video analytics 
