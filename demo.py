@@ -15,7 +15,7 @@ f = open(json_path)
 data = json.load(f)
 
 # initialize the trackers
-tracker = Tracker(thresh1=250, thresh2=5)
+tracker = Tracker(thresh1=500, thresh2=10)
 
 # cam
 cam = DummyFeed()
@@ -63,15 +63,15 @@ for frames in tqdm(data):
         k = tracker.trackerList[i].prediction
         c = tracker.trackerList[i].centroid
 
-        if c is not None:
-            if polygon.contains_points(c):
+        # if c is not None:
+        #     if polygon.contains_points(c):
                 # print(tracker.trackerList[i].centroid)
         
-                cv2.rectangle(frame, (int(k[0]),int(k[1])), 
-                    (int(k[2]),int(k[3])),tracker.trackerList[i].color, 3)
+                # cv2.rectangle(frame, (int(k[0]),int(k[1])), 
+                #     (int(k[2]),int(k[3])),tracker.trackerList[i].color, 8)
 
 
-    frame[submask !=  255] = frame[submask !=  255]/4
+    # frame[submask !=  255] = frame[submask !=  255]/4
     frame = frame.astype(np.uint8)
 
     # out.write(frame)
