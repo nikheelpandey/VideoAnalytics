@@ -28,7 +28,7 @@ class Track(object):
 
 class Tracker(object):
 
-	linear_sum_assignment
+	# linear_sum_assignment
 	def __init__(self, thresh1=None, thresh2=None ):
 		# super(Tracker, self).__init__()
 
@@ -71,7 +71,7 @@ class Tracker(object):
 			else:
 				self.trackerList[i].undetectedFrameCount += 1
 
-		return unassign_trackerList
+		
 
 
 	def __del__(self):
@@ -105,7 +105,7 @@ class Tracker(object):
 		# get assignment according to hungarien algorithm
 		self.assign(self.cost)
 		# to check if different thresholds (IOU and Dist) are being satisfied
-		unassign_trackerList = self.unassignment(detections)
+		self.unassignment(detections)
 		
 		self.__del__()
 
